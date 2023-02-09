@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Head from "next/head";
 import Layouts from "../../layouts/Layouts";
 import { Tab } from "@headlessui/react";
-import { DealType } from "../../interfaces";
+import { IDeal } from "../../interfaces";
 import { DealCard } from "../../components";
 
 import deals from "../../../data.json";
