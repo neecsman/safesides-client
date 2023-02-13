@@ -1,33 +1,10 @@
 import { RadioGroup } from "@headlessui/react";
-import { HTMLInputTypeAttribute } from "react";
 import InputMask from "react-input-mask-next";
 import { AddressSuggestions } from "react-dadata";
 
-interface InputProps {
-  lable?: string;
-  errMsg?: string;
-  register?: any;
-  errors?: any;
-  required?: boolean;
-  className?: string;
-  name: string;
-  placeholder?: string;
-  type?: HTMLInputTypeAttribute;
-  mask?: string;
-  adress?: boolean;
-  Controller?: any;
-  control?: any;
-  disabled?: boolean;
-  value?: string;
-  edit?: boolean;
-  id?: string;
-  defaultChecked?: boolean;
-  radioTitle?: string;
-  radioText?: string;
-  onChange?: any;
-}
+import { IInput } from "../../interfaces";
 
-const AdressInput: React.FC<InputProps> = ({
+const AdressInput: React.FC<IInput> = ({
   register,
   placeholder,
   control,
@@ -57,14 +34,15 @@ const AdressInput: React.FC<InputProps> = ({
           }}
           suggestionsClassName="border p-4 shadow-md rounded-lg mt-1 bg-white flex flex-col items-start absolute w-full z-50"
           suggestionClassName="hover:bg-blue-400 hover:text-white rounded px-4 py-2 w-full text-start"
-          highlightClassName=" bg-blue-100 rounded p-0.5"
+          highlightClassName="bg-blue-100 rounded p-0.5"
+          containerClassName="relative"
         />
       )}
     />
   );
 };
 
-const Input: React.FC<InputProps> = ({
+const Input: React.FC<IInput> = ({
   lable,
   errMsg,
   register,

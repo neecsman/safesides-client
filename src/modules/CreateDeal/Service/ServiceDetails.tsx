@@ -14,14 +14,14 @@ const ServiceDetails = ({
         <Controller
           name="commission_paid_by"
           control={control}
-          defaultValue="creator"
+          defaultValue={1}
           rules={{ required: true }}
           render={({ field: { onChange, value } }: any) => (
             <RadioGroup value={value} onChange={onChange}>
               <RadioGroup.Label>Комиссию сервиса оплачивает</RadioGroup.Label>
               <div className=" space-y-2 mt-5">
                 <RadioGroup.Option
-                  value="creator"
+                  value={1}
                   className={({ checked }) =>
                     `${checked ? "border-blue-500 text-white" : "bg-white"}
                      relative flex cursor-pointer rounded-xl px-5 py-4 border border-gray-300 focus:outline-none hover:bg-gray-100`
@@ -62,7 +62,7 @@ const ServiceDetails = ({
                   )}
                 </RadioGroup.Option>
                 <RadioGroup.Option
-                  value="accepter"
+                  value={2}
                   className={({ active, checked }) =>
                     `
                    ${checked ? "border-blue-500 text-white" : "bg-white"}
@@ -104,7 +104,7 @@ const ServiceDetails = ({
                   )}
                 </RadioGroup.Option>
                 <RadioGroup.Option
-                  value="half"
+                  value={3}
                   className={({ active, checked }) =>
                     `
                    ${checked ? "border-blue-500 text-white" : "bg-white"}
@@ -155,7 +155,7 @@ const ServiceDetails = ({
         errors={errors}
         rows={6}
         lable="Комментарий"
-        name="comment"
+        name="terms"
         placeholder="Опишите условия сделки и что включает в себя оказываемая услуга - так мы сможем вас защитить в конфликтной ситуации"
         errMsg="Опишите условия сделки"
         required
@@ -167,6 +167,13 @@ const ServiceDetails = ({
         control={control}
         setValue={setValue}
         formData={formData}
+        accept={{
+          "image/*": [],
+          "application/zip": [],
+          "application/pdf": [],
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            [],
+        }}
         label="Прикрепить файлы"
         placeholder="Перенесите файлы сюда или нажмите (до 5 шт., до 5 мб.)"
       />

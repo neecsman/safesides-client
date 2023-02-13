@@ -1,21 +1,18 @@
 import React from "react";
 import { Dropdown, Hamburger } from "..";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../img/logo.svg";
 
 const Header = () => {
   return (
-    <header className="flex justify-center bg-white items-center shadow-sm shadow-gray-200 h-16 lg:h-18 sticky top-0 z-10">
+    <header className="flex justify-center bg-white items-center shadow-sm shadow-gray-200 h-16 lg:h-20 sticky top-0 z-10">
       <nav className=" px-2 lg:px-4 py-2.5 w-[1320px]">
         <div className="flex flex-wrap justify-between items-center mx-auto w-full">
-          <a href="/">
-            <Image
-              src={logo}
-              alt="Logo"
-              className="h-12 lg:h-14 w-auto"
-              priority
-            />
-          </a>
+          <Link href="/">
+            <Image src={logo} alt="Logo" className="h-12 lg:h-14 w-auto" />
+          </Link>
+
           <div className="flex items-center lg:order-2">
             <Dropdown
               auth={true}

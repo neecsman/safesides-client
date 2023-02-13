@@ -8,6 +8,7 @@ interface DropzoneProps {
   formData?: any;
   label?: string;
   placeholder?: string;
+  accept?: {};
   name: string;
 }
 
@@ -18,6 +19,7 @@ const FileInput: React.FC<DropzoneProps> = ({
   formData,
   label,
   placeholder,
+  accept,
   name,
 }) => {
   return (
@@ -27,13 +29,7 @@ const FileInput: React.FC<DropzoneProps> = ({
         control={control}
         render={({ field: { onChange } }: any) => (
           <Dropzone
-            accept={{
-              "image/*": [],
-              "application/zip": [],
-              "application/pdf": [],
-              "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                [],
-            }}
+            accept={accept}
             maxSize={5242880}
             maxFiles={5}
             onDrop={(acceptedFiles) => {
@@ -90,7 +86,7 @@ const FileInput: React.FC<DropzoneProps> = ({
                       formData.attachments.map((file: any, i: any) => (
                         <FilePreview
                           key={i}
-                          file={file}
+                          attachments={file}
                           removeFile={removeFile}
                         />
                       ))}

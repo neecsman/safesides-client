@@ -24,7 +24,7 @@ const Dropdown = ({
       {auth ? (
         <Menu
           as="div"
-          className="relative inline-block text-left px-4 pt-2 lg:px-0 lg:py-0"
+          className="relative inline-flex text-left lg:px-0 lg:py-0 mr-4 lg:mr-0"
         >
           <Menu.Button className="inline-flex w-full justify-center items-center rounded-full  text-base font-medium text-gray-800 hover:text-blue-500 hover:bg-opacity-30 focus:outline-none ring-2 ring-gray-200 focus:ring-2  focus:ring-gray-400 outline-none lg:ring-0 lg:focus:ring-0">
             <Avatar
@@ -42,7 +42,8 @@ const Dropdown = ({
           </Menu.Button>
 
           <Transition
-            as={Fragment}
+            as="div"
+            className="mt-10"
             enter="transition ease-out duration-100"
             enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100"

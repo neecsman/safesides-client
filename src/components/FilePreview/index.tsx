@@ -1,71 +1,38 @@
 import React from "react";
-
-interface CustomFile extends File {
-  preview: string;
-}
-
-interface PreviewProps {
-  removeFile?: (file: File) => void;
-  file: CustomFile;
-}
-
-const FilePreview: React.FC<PreviewProps> = ({ removeFile, file }) => {
+import { IPreview } from "../../interfaces";
+const FilePreview: React.FC<IPreview> = ({ removeFile, attachments }) => {
   return (
     <div className="w-28 mr-3 flex flex-col justify-end group relative">
       {removeFile && (
         <button
-          onClick={() => removeFile(file)}
+          onClick={() => removeFile(attachments)}
           type="button"
           className="absolute text-sm px-1 bg-blue-400 hover:bg-blue-500 text-white rounded right-1 top-1 hidden group-hover:block"
         >
           ✕
         </button>
       )}
-      {file.type === "application/zip" && (
-        <div className="h-full flex flex-col justify-end cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
-          <div className="flex justify-center">
-            <ZipIcon className="w-10" />
-          </div>
-          <p className="mt-2 text-sm opacity-60 truncate ...">{file.name}</p>
-        </div>
-      )}
-      {file.type === "application/pdf" && (
-        <div className="h-full flex flex-col justify-end cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
-          <div className="flex justify-center">
-            <PDFIcon className="w-10" />
-          </div>
-          <p className="mt-2 text-sm opacity-60 truncate ...">{file.name}</p>
-        </div>
-      )}
-      {file.type === "image/svg+xml" && (
-        <div className="h-full flex flex-col justify-end items-center cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
-          <div className="flex justify-center">
-            <SvgIcon className="w-12" />
-          </div>
-          <p className="mt-2 text-sm opacity-60 truncate ...">{file.name}</p>
-        </div>
-      )}
-      {file.type ===
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && (
-        <div className="h-full flex flex-col justify-end cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
-          <div className="flex justify-center">
-            <DocIcon className="w-10" />
-          </div>
-          <p className="mt-2 text-sm opacity-60 truncate ...">{file.name}</p>
-        </div>
-      )}
-      {file.type === "image/png" && (
-        <div className="h-full flex flex-col justify-end cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
-          <div className="flex justify-center w-full h-16">
-            <img
-              src={file.preview}
-              alt="preview"
-              className=" object-cover rounded"
-            />
-          </div>
-          <p className="mt-2 text-sm opacity-60 truncate ...">{file.name}</p>
-        </div>
-      )}
+
+      <div className="h-24 flex flex-col justify-center items-center cursor-pointer bg-gray-100 rounded-lg p-2 transition-all hover:bg-gray-200">
+        {attachments.type === "application/zip" && <ZipIcon className="w-10" />}
+        {attachments.type === "application/pdf" && <PDFIcon className="w-10" />}
+        {attachments.type === "image/svg+xml" && <SvgIcon className="w-12" />}
+        {(attachments.type === "image/png" ||
+          attachments.type === "image/jpg" ||
+          attachments.type === "image/jpeg") && (
+          <img
+            src={attachments.preview}
+            alt="preview"
+            className=" object-cover rounded h-full"
+          />
+        )}
+
+        {attachments.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && (
+          <DocIcon className="w-10" />
+        )}
+      </div>
+      <p className="text-sm opacity-60 truncate ...">{attachments.name}</p>
     </div>
   );
 };

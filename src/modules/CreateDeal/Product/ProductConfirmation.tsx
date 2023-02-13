@@ -1,25 +1,26 @@
 import { FilePreview } from "../../../components";
-
-const ProductConfirmation: React.FC<FormValue> = ({
-  delivery_method,
+import { IDeal } from "../../../interfaces";
+const ProductConfirmation: React.FC<IDeal> = ({
+  shipping_method,
   title,
   description,
   attachments,
   commission_paid_by,
-  sender_name,
-  sender_phone,
-  sender_adress,
-  sender_entrance,
-  sender_floor,
-  sender_appart,
-  sender_comment,
-  recipient_name,
-  recipient_phone,
-  recipient_adress,
-  recipient_entrance,
-  recipient_floor,
-  recipient_appart,
-  recipient_comment,
+  creator_name,
+  creator_phone,
+  creator_adress,
+  creator_entrance,
+  creator_floor,
+  creator_appart,
+  creator_comment,
+  accepter_name,
+  accepter_phone,
+  accepter_adress,
+  accepter_entrance,
+  accepter_floor,
+  accepter_appart,
+  accepter_comment,
+  terms,
   size,
   weight,
   price,
@@ -27,15 +28,15 @@ const ProductConfirmation: React.FC<FormValue> = ({
   let buyer_commission = 0;
   let seller_commission = 0;
 
-  if (commission_paid_by === "buyer") {
+  if (commission_paid_by === 2) {
     buyer_commission = (Number(price) / 100) * 10;
   }
 
-  if (commission_paid_by === "seller") {
+  if (commission_paid_by === 1) {
     seller_commission = (Number(price) / 100) * 10;
   }
 
-  if (commission_paid_by === "half") {
+  if (commission_paid_by === 3) {
     buyer_commission = ((Number(price) / 100) * 10) / 2;
     seller_commission = ((Number(price) / 100) * 10) / 2;
   }
@@ -64,12 +65,35 @@ const ProductConfirmation: React.FC<FormValue> = ({
             <span className="mr-2">Цена:</span>
             <span className="opacity-60">{price} ₽</span>
           </li>
-          <li className="mb-3">
+          {/* <li className="mb-3">
             <span className="mr-2">Фото:</span>
             <div className="flex mt-3">
               {attachments &&
                 attachments.map((item: any, i: number) => (
-                  <FilePreview key={i} file={item} />
+                  <FilePreview key={i} attachments={item} />
+                ))}
+            </div>
+          </li> */}
+        </ul>
+      </div>
+      <div className="mb-14">
+        <h3 className="text-xl font-medium mb-6">Детали</h3>
+        <ul>
+          <li className="mb-3">
+            <span className="mr-2">Комиссию оплачивает:</span>
+            <span className="opacity-60">
+              {commission_paid_by === 2 && "покупатель"}
+              {commission_paid_by === 1 && "продавец"}
+              {commission_paid_by === 3 && "50/50"}
+            </span>
+          </li>
+
+          <li className="mb-3">
+            <span className="mr-2">Фото:</span>
+            <div className="flex mt-3">
+              {attachments &&
+                attachments.map((file, i) => (
+                  <FilePreview key={i} attachments={file} />
                 ))}
             </div>
           </li>
@@ -77,7 +101,7 @@ const ProductConfirmation: React.FC<FormValue> = ({
       </div>
       <div className="mb-14">
         <h3 className="text-xl font-medium mb-6">Информация о доставке</h3>
-        {delivery_method === 1 && (
+        {shipping_method === 1 && (
           <ul>
             <li className="mb-3">
               <span className="mr-2">Способ доставки:</span>
@@ -85,44 +109,44 @@ const ProductConfirmation: React.FC<FormValue> = ({
             </li>
           </ul>
         )}
-        {delivery_method === 2 && (
+        {shipping_method === 2 && (
           <>
             <h2 className="font-bold mb-4">Отправление:</h2>
             <ul>
               <li className="mb-3">
                 <span className="mr-2">Имя:</span>
-                <span className="opacity-60">{sender_name}</span>
+                <span className="opacity-60">{creator_name}</span>
               </li>
               <li className="mb-3">
                 <span className="mr-2">Номер телефона:</span>
-                <span className="opacity-60">{sender_phone}</span>
+                <span className="opacity-60">{creator_phone}</span>
               </li>
               <li className="mb-3">
                 <span className="mr-2"> Адрес отправления:</span>
-                <span className="opacity-60">{`${sender_adress?.value}, ${
-                  sender_entrance && `подъезд ${sender_entrance}`
-                }, ${sender_floor && `этаж №${sender_floor}`}, ${
-                  sender_appart && `квартира № ${sender_appart}`
-                } ${sender_comment && `(${sender_comment})`}`}</span>
+                <span className="opacity-60">{`${creator_adress?.value}, ${
+                  creator_entrance && `подъезд ${creator_entrance}`
+                }, ${creator_floor && `этаж №${creator_floor}`}, ${
+                  creator_appart && `квартира № ${creator_appart}`
+                } ${creator_comment && `(${creator_comment})`}`}</span>
               </li>
             </ul>
             <h2 className="font-bold mb-4 mt-10">Получение:</h2>
             <ul>
               <li className="mb-3">
                 <span className="mr-2">Имя:</span>
-                <span className="opacity-60">{recipient_name}</span>
+                <span className="opacity-60">{accepter_name}</span>
               </li>
               <li className="mb-3">
                 <span className="mr-2">Номер телефона:</span>
-                <span className="opacity-60">{recipient_phone}</span>
+                <span className="opacity-60">{accepter_phone}</span>
               </li>
               <li className="mb-3">
                 <span className="mr-2"> Адрес получения:</span>
-                <span className="opacity-60">{`${recipient_adress?.value}, ${
-                  recipient_entrance && `подъезд ${recipient_entrance}`
-                }, ${recipient_floor && `этаж №${recipient_floor}`}, ${
-                  recipient_appart && `квартира № ${recipient_appart}`
-                } ${recipient_comment && `(${recipient_comment})`}`}</span>
+                <span className="opacity-60">{`${accepter_adress?.value}, ${
+                  accepter_entrance && `подъезд ${accepter_entrance}`
+                }, ${accepter_floor && `этаж №${accepter_floor}`}, ${
+                  accepter_appart && `квартира № ${accepter_appart}`
+                } ${accepter_comment && `(${accepter_comment})`}`}</span>
               </li>
             </ul>
           </>
@@ -208,20 +232,20 @@ interface FormValue {
   description?: string;
   attachments?: CustomFile[];
   commission_paid_by?: string;
-  sender_name?: string;
-  sender_phone?: string;
-  sender_adress?: Adress;
-  sender_entrance?: number;
-  sender_floor?: number;
-  sender_appart?: number;
-  sender_comment?: string;
-  recipient_name?: string;
-  recipient_phone?: string;
-  recipient_adress?: Adress;
-  recipient_entrance?: string;
-  recipient_floor?: string;
-  recipient_appart?: string;
-  recipient_comment?: string;
+  creator_name?: string;
+  creator_phone?: string;
+  creator_adress?: Adress;
+  creator_entrance?: number;
+  creator_floor?: number;
+  creator_appart?: number;
+  creator_comment?: string;
+  accepter_name?: string;
+  accepter_phone?: string;
+  accepter_adress?: Adress;
+  accepter_entrance?: string;
+  accepter_floor?: string;
+  accepter_appart?: string;
+  accepter_comment?: string;
   size?: string;
   weight?: string;
   price?: number;
