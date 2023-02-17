@@ -1,26 +1,27 @@
 import { FilePreview } from "../../../components";
+import { IDeal } from "../../../interfaces";
 
-const ServiceConfirmation: React.FC<FormValue> = ({
-  service,
+const ServiceConfirmation: React.FC<IDeal> = ({
+  title,
   description,
   price,
   commission_paid_by,
-  end_time,
-  comment,
-  file,
+  deadline_date,
+  terms,
+  attachments,
 }) => {
   let accepter_comission = 0;
   let creator_commission = 0;
 
-  if (commission_paid_by === "accepter") {
+  if (commission_paid_by === 2) {
     accepter_comission = (Number(price) / 100) * 10;
   }
 
-  if (commission_paid_by === "creator") {
+  if (commission_paid_by === 1) {
     creator_commission = (Number(price) / 100) * 10;
   }
 
-  if (commission_paid_by === "half") {
+  if (commission_paid_by === 3) {
     accepter_comission = ((Number(price) / 100) * 10) / 2;
     creator_commission = ((Number(price) / 100) * 10) / 2;
   }
@@ -32,7 +33,7 @@ const ServiceConfirmation: React.FC<FormValue> = ({
         <ul>
           <li className="mb-3">
             <span className="mr-2">Наименование:</span>
-            <span className="opacity-60">{service}</span>
+            <span className="opacity-60">{title}</span>
           </li>
           <li className="mb-3">
             <span className="mr-2">Описание:</span>
@@ -44,7 +45,7 @@ const ServiceConfirmation: React.FC<FormValue> = ({
           </li>
           <li className="mb-3">
             <span className="mr-2">Дата завершения:</span>
-            <span className="opacity-60">{end_time}</span>
+            <span className="opacity-60">{deadline_date}</span>
           </li>
         </ul>
       </div>
@@ -54,20 +55,22 @@ const ServiceConfirmation: React.FC<FormValue> = ({
           <li className="mb-3">
             <span className="mr-2">Комиссию оплачивает:</span>
             <span className="opacity-60">
-              {commission_paid_by === "accepter" && "исполнитель"}
-              {commission_paid_by === "creator" && "заказчик"}
-              {commission_paid_by === "half" && "50/50"}
+              {commission_paid_by === 2 && "исполнитель"}
+              {commission_paid_by === 1 && "заказчик"}
+              {commission_paid_by === 3 && "50/50"}
             </span>
           </li>
           <li className="mb-3">
             <span className="mr-2">Комментарий:</span>
-            <span className="opacity-60">{comment}</span>
+            <span className="opacity-60">{terms}</span>
           </li>
           <li className="mb-3">
             <span className="mr-2">Приложения:</span>
             <div className="flex mt-3">
-              {file &&
-                file.map((file, i) => <FilePreview key={i} file={file} />)}
+              {attachments &&
+                attachments.map((file, i) => (
+                  <FilePreview key={i} attachments={file} />
+                ))}
             </div>
           </li>
         </ul>
@@ -147,17 +150,3 @@ const ServiceConfirmation: React.FC<FormValue> = ({
 };
 
 export default ServiceConfirmation;
-
-interface CustomFile extends File {
-  preview: string;
-}
-
-interface FormValue {
-  service?: string;
-  description?: string;
-  commission_paid_by?: string;
-  end_time?: string;
-  price?: string;
-  comment?: string;
-  file?: CustomFile[];
-}

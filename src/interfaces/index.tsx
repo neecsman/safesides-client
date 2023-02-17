@@ -1,3 +1,4 @@
+import { HTMLInputTypeAttribute } from "react";
 export interface IAdress {
   data?: {};
   unrestricted_value?: string;
@@ -37,8 +38,38 @@ export interface IDeal {
   accepter_floor?: number;
   accepter_appart?: number;
   accepter_comment?: string;
+  terms?: string;
   size?: string;
   weight?: number;
   price: number;
   status: number; // 1 - created; 2 - active; 3 - completed; 4 - canceled;
+}
+
+export interface IInput {
+  lable?: string;
+  errMsg?: string;
+  register?: any;
+  errors?: any;
+  required?: boolean;
+  className?: string;
+  name: string;
+  placeholder?: string;
+  type?: HTMLInputTypeAttribute;
+  mask?: string;
+  adress?: boolean;
+  Controller?: any;
+  control?: any;
+  disabled?: boolean;
+  value?: string;
+  edit?: boolean;
+  id?: string;
+  defaultChecked?: boolean;
+  radioTitle?: string;
+  radioText?: string;
+  onChange?: any;
+}
+
+export interface IPreview {
+  attachments: IFile;
+  removeFile?: (file: IFile) => void;
 }

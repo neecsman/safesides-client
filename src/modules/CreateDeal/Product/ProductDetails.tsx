@@ -8,7 +8,7 @@ const ProductDetails = ({
   control,
   watch,
 }: any) => {
-  const delivery_method = watch("delivery_method");
+  const shipping_method = watch("shipping_method");
 
   return (
     <>
@@ -16,14 +16,14 @@ const ProductDetails = ({
         <Controller
           name="commission_paid_by"
           control={control}
-          defaultValue="seller"
+          defaultValue={1}
           rules={{ required: true }}
           render={({ field: { onChange, value } }: any) => (
             <RadioGroup value={value} onChange={onChange}>
               <RadioGroup.Label>Комиссию сервиса оплачивает</RadioGroup.Label>
               <div className=" space-y-2 mt-5">
                 <RadioGroup.Option
-                  value="seller"
+                  value={1}
                   className={({ checked }) =>
                     `${checked ? "border-blue-500 text-white" : "bg-white"}
                      relative flex cursor-pointer rounded-xl px-5 py-4 border border-gray-300 focus:outline-none hover:bg-gray-100`
@@ -64,7 +64,7 @@ const ProductDetails = ({
                   )}
                 </RadioGroup.Option>
                 <RadioGroup.Option
-                  value="buyer"
+                  value={2}
                   className={({ checked }) =>
                     `
                    ${checked ? "border-blue-500 text-white" : "bg-white"}
@@ -106,7 +106,7 @@ const ProductDetails = ({
                   )}
                 </RadioGroup.Option>
                 <RadioGroup.Option
-                  value="half"
+                  value={3}
                   className={({ checked }) =>
                     `
                    ${checked ? "border-blue-500 text-white" : "bg-white"}
@@ -155,7 +155,7 @@ const ProductDetails = ({
       </div>
       <div className="mx-3 mb-5">
         <Controller
-          name="delivery_method"
+          name="shipping_method"
           control={control}
           defaultValue={1}
           rules={{ required: true }}
@@ -253,7 +253,7 @@ const ProductDetails = ({
         />
       </div>
 
-      {delivery_method == 2 && (
+      {shipping_method == 2 && (
         <>
           <h3 className="text-2xl font-medium my-10 text-center mx-3">
             Отправление
@@ -263,7 +263,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Имя"
-              name="sender_name"
+              name="creator_name"
               placeholder="Фёдор Достоевский"
               errMsg="Введите имя"
               required
@@ -275,7 +275,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Номер телефона"
-              name="sender_phone"
+              name="creator_phone"
               placeholder="+7 999 999 99 99"
               errMsg="Введите номер телефона"
               mask="+7 999 999 99 99"
@@ -289,7 +289,7 @@ const ProductDetails = ({
             register={register}
             errors={errors}
             lable="Адрес отправления"
-            name="sender_adress"
+            name="creator_adress"
             placeholder="г. Москва, ул. Новый Арбат, д. 25"
             errMsg="Введите адрес отправления"
             required
@@ -303,7 +303,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Подъезд"
-              name="sender_entrance"
+              name="creator_entrance"
               placeholder="1"
               mask="99"
               Controller={Controller}
@@ -313,7 +313,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Этаж"
-              name="sender_floor"
+              name="creator_floor"
               placeholder="1"
               mask="99"
               Controller={Controller}
@@ -323,7 +323,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="кв/офис"
-              name="sender_appart"
+              name="creator_appart"
               placeholder="1"
               mask="999"
               Controller={Controller}
@@ -335,7 +335,7 @@ const ProductDetails = ({
             errors={errors}
             rows={4}
             lable="Комментарий"
-            name="sender_comment"
+            name="creator_comment"
             placeholder="Комментарий для курьера"
           />
 
@@ -348,7 +348,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Имя"
-              name="recipient_name"
+              name="accepter_name"
               placeholder="Александр Пушкни"
               errMsg="Введите имя"
               required
@@ -360,7 +360,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Номер телефона"
-              name="recipient_phone"
+              name="accepter_phone"
               placeholder="+7 999 999 99 99"
               errMsg="Введите номер телефона"
               mask="+7 999 999 99 99"
@@ -373,7 +373,7 @@ const ProductDetails = ({
             register={register}
             errors={errors}
             lable="Адрес получения"
-            name="recipient_adress"
+            name="accepter_adress"
             placeholder="г. Москва, ул. Новый Арбат, д. 8"
             errMsg="Введите адрес доставки"
             required
@@ -386,7 +386,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Подъезд"
-              name="recipient_entrance"
+              name="accepter_entrance"
               placeholder="1"
               mask="99"
               Controller={Controller}
@@ -396,7 +396,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="Этаж"
-              name="recipient_floor"
+              name="accepter_floor"
               placeholder="1"
               mask="99"
               Controller={Controller}
@@ -406,7 +406,7 @@ const ProductDetails = ({
               register={register}
               errors={errors}
               lable="кв/офис"
-              name="recipient_appart"
+              name="accepter_appart"
               placeholder="1"
               mask="99"
               Controller={Controller}
@@ -418,7 +418,7 @@ const ProductDetails = ({
             errors={errors}
             rows={4}
             lable="Комментарий"
-            name="recipient_comment"
+            name="accepter_comment"
             placeholder="Комментарий для курьера"
           />
 

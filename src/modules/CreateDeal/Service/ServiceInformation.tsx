@@ -27,7 +27,7 @@ const ServiceInformation = ({ register, errors }: any) => {
           register={register}
           errors={errors}
           lable="Дата оказания услуги"
-          name="end_time"
+          name="deadline_date"
           placeholder="01.01.2023"
           errMsg="Укажите дату оказания услуги"
           required

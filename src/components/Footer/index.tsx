@@ -11,7 +11,6 @@ const Footer = () => {
               src={logo}
               alt="logo"
               className="h-12 lg:h-14 w-auto hidden lg:block"
-              priority
             />
           </div>
           <div className="hidden lg:block">

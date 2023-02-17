@@ -6,7 +6,7 @@ import { Avatar } from "..";
 const Menu = () => {
   const router = useRouter();
   return (
-    <aside className="flex flex-col w-[420px] h-full mb-36">
+    <aside className="hidden lg:flex flex-col w-[420px] h-full mb-36">
       <div className="sticky top-48">
         <div className="flex items-center">
           <Avatar

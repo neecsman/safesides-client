@@ -48,6 +48,9 @@ const ProductInformation = ({
         control={control}
         setValue={setValue}
         formData={formData}
+        accept={{
+          "image/*": [],
+        }}
         label="Прикрепить фото товара"
         placeholder="Перенесите изображения сюда или нажмите (до 5 шт. не более 5 мб.)"
       />
